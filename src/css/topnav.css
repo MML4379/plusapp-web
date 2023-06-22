@@ -1,0 +1,47 @@
+.topnav {
+    padding: 8px;
+    width: 95%;
+    margin-left: 5%;
+    background: #222222BB;
+    display: flex;
+    flex-direction: row;
+}
+
+.searchNav {
+    display: flex;
+    flex-direction: row;
+    padding: 8px;
+}
+
+.searchBox {
+    padding: 4px;
+    border-radius: 50px;
+    border: 2px solid #555;
+    background: #151515;
+    font-family: "Inter";
+    color: #fdfdfd;
+    outline: none;
+}
+
+.searchBox:placeholder {
+    color: #fdfdfd;
+}
+
+.searchBox:active {
+    border: 2px solid #777;
+    transition: 0.25s;
+}
+
+.searchSub {
+    padding: 4px;
+    padding-left: 9px;
+    padding-right: 9px;
+    border: 2px solid #555;
+    background: #151515;
+    border-radius: 50px;
+    margin-left: 12px;
+}
+
+.searchIcon {
+    color: #fdfdfd;
+}

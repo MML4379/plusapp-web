@@ -1,0 +1,94 @@
+.S22Ftd {
+    padding: 8px;
+    width: 5%;
+    height: 100%;
+    background: #222222BB;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.j180G8 {
+    height: 8%;
+    aspect-ratio: 1/1;
+}
+
+.navLinks {
+    display: flex;
+    flex-direction: column;
+}
+
+.navlink {
+    color: #fdfdfd;
+    text-decoration: none;
+    cursor: none;
+    padding: 8px;
+    display: flex;
+    flex-direction: row-reverse;
+    transition: 0.25s;
+}
+
+.navlink:hover {
+    cursor: pointer;
+    background: #444;
+    border-radius: 16px;
+    transition: 0.25s;
+}
+
+.smallScreen {
+    padding-right: 30%;
+    display: flex;
+    justify-self: center;
+    align-self: center;
+}
+
+.searchNav {
+    display: flex;
+    flex-direction: row;
+    padding: 8px;
+}
+
+.searchBox {
+    padding: 4px;
+    border-radius: 50px;
+    border: 2px solid #555;
+    background: #151515;
+    font-family: "Inter";
+    color: #fdfdfd;
+    outline: none;
+}
+
+.searchBox:placeholder {
+    color: #fdfdfd;
+}
+
+.searchBox:active {
+    border: 2px solid #777;
+    transition: 0.25s;
+}
+
+.searchSub {
+    padding: 4px;
+    padding-left: 9px;
+    padding-right: 9px;
+    border: 2px solid #555;
+    background: #151515;
+    border-radius: 50px;
+    margin-left: 12px;
+}
+
+.searchIcon {
+    color: #fdfdfd;
+}
+
+.signInNav {
+    background: #222;
+    color: #fdfdfd;
+    padding: 4px;
+    display: flex;
+    flex-direction: row;
+    border-radius: 8px;
+    border: none;
+}
