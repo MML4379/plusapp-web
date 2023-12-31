@@ -1,6 +1,6 @@
 {
   "short_name": "MML+",
-  "name": "MML+ Beta",
+  "name": "MML+",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +20,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#0264dd",
+  "background_color": "#0264dd"
 }

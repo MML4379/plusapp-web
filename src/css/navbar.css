@@ -1,0 +1,81 @@
+/* Reset some default styles */
+body, h1, h2, p, ul, li {
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar styles */
+.navbar {
+  background: #00000077;
+  backdrop-filter: blur(64px);
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fdfdfd;
+  font-size: 1.2rem;
+}
+
+.navbar-logo {
+  width: 64px; 
+  height: 64px;
+  object-fit: contain;
+  margin-right: 24px;
+}
+
+.navbar-right {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.user-handle a {
+  color: #fdfdfd;
+  float: right;
+}
+
+.navbar-links {
+  display: flex;
+  flex-direction: row;
+}
+
+.navbar-link {
+  margin-right: 16px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  background: #555;
+  border: 2px solid #000;
+  border-radius: 16px;
+  color: #fdfdfd;
+  font-size: 32px;
+}
+
+.navbar-link:hover {
+  border: 2px solid #fdfdfd;
+}
+
+
+@media screen and (max-width: 720px) {
+    .navbar-link {
+        margin-right: 8px;
+        padding: 4px;
+        border-radius: 8px;
+        font-size: 24px;
+        border-color: transparent;
+        background: transparent;
+    }
+
+    .navbar-logo {
+        width: 48px;
+        height: 48px;
+    }
+
+    .user-fullname {
+      display: none;
+    }
+
+    .navbar {
+        padding: 8px;
+    }
+}
