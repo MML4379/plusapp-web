@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { redirect, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { db } from '../firebase';
-import { getDoc, doc } from 'firebase/firestore';
+import { getDoc, doc, collection, getDocs, query, where } from 'firebase/firestore';
 import "../css/main.css"
+import { AuthorInfo } from '../components/userinfo';
 const userImg = require("../assets/default-user-img.png");
 
 const BadgeImages = {
@@ -17,21 +18,36 @@ const ProfilePage = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      try {
-        const userRef = doc(db, 'users', id);
-        const userDoc = await getDoc(userRef);
+  try {
+    const userRef = doc(db, 'users', id);
+    const userDoc = await getDoc(userRef);
 
-        if (userDoc.exists()) {
-          setUserData(userDoc.data());
-        } else {
-          alert("User does not exist!");
-          window.location.replace("/home");
-        }
-      } catch (error) {
-        alert("Error getting user data!");
-        console.error("Error getting user data: " + error);
-      }
+    if (userDoc.exists()) {
+      setUserData(userDoc.data());
+
+      // Fetch and display user posts
+      const postsRef = collection(db, 'posts');
+      const querySnapshot = await getDocs(query(postsRef, where('authorId', '==', id)));
+
+      const userPosts = [];
+      querySnapshot.forEach((postDoc) => {
+        userPosts.push({ id: postDoc.id, ...postDoc.data() });
+      });
+
+      // Update state with user posts
+      setUserData((prevUserData) => ({
+        ...prevUserData,
+        posts: userPosts,
+      }));
+    } else {
+      alert("User does not exist!");
+      window.location.replace("/home");
     }
+  } catch (error) {
+    alert("Error getting user data!");
+    console.error("Error getting user data: " + error);
+  }
+};
     fetchUserData();
   }, [id])
 
@@ -52,7 +68,7 @@ const ProfilePage = () => {
       finishedProduct === "12/19/2023"
     ) {
       return (
-        <p>This user is an OG! They joined on {finishedProduct}, when MML+ was first announced!</p>
+        <p>This user has been around for a while, they joined on {finishedProduct}, when MML+ was first announced!</p>
       );
     } else {
       return(
@@ -64,7 +80,7 @@ const ProfilePage = () => {
   const renderBadges = () => {
     return (
       <div className="badgeContainer">
-        <h3>My badges</h3>
+        <h3>My badges (Beta)</h3>
         {userData.badges?.map((badgeId) => (
           <img
             key={badgeId}
@@ -97,7 +113,29 @@ const ProfilePage = () => {
           </div>
           <div className="profile-content">
             {renderBadges()}
-          </div>
+            <br />
+            {userData.posts && userData.posts.length > 0 ? (
+            <div className='postList'>
+              {userData.posts.map((post) => (
+                <div data-mmlid={post.id} data-plusapp-author={post.details.author} key={post.id} className='post'>
+                  <div className='postHeader'>
+                    <AuthorInfo uid={post.details.author} />
+                  </div>
+                  <br />
+                  <main className='postBody'>
+                    {post.details.text}
+                  </main>
+                  <br />
+                  <footer className='postButtons'>
+                    <p>Likes: {post.details.likes}</p>
+                  </footer>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <strong>This user hasn't posted anything.</strong>
+          )}
+        </div>
         </>
       ) : (
         <p>Loading...</p>

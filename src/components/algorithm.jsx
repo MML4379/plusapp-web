@@ -3,15 +3,12 @@ import { getDocs, collection } from 'firebase/firestore';
 
 async function loadPosts(user) {
   try {
-    // Query all posts
+    // Query every post from the collection
     const postsQuery = collection(db, 'posts');
-    const postsSnapshot = await getDocs(postsQuery);
-    const allPosts = postsSnapshot.docs.map((doc) => doc.data());
+    const postsSnapshot = await getDocs(postsQuery); // Create a snapshot for those posts
+    const allPosts = postsSnapshot.docs.map((doc) => doc.data()); // Put those posts into a JSON map
 
-    console.log('All posts:', allPosts);
-
-    // You can further filter posts based on user preferences or interactions
-    // For simplicity, returning all posts for now
+    // This just returns all posts, but in later versions, it will be filtered to specific genres.
     return allPosts;
   } catch (error) {
     console.error('Error loading posts:', error);

@@ -9,14 +9,11 @@ import { auth } from "./firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import PostPage from './pages/post';
 import Post from './pages/viewpost';
-import Snowfall from 'react-snowfall';
 import { NotFound } from './pages/notfound';
 
 // MML+ Version 0.1
 
 function App() {
-    console.info("Please close this console if you do not know what you are doing. Any exploit to purposefully get a user banned or to exploit the coins system WILL get you banned.");
-    console.info("MML+ version 0.1, Copyright (C) 2023 MML Tech LLC - https://mmltech.net");
     const [u] = useAuthState(auth);
     var uid = "ANONYMOUS";
     if (u) {
@@ -26,18 +23,8 @@ function App() {
 
     return(
         <div className='app'>
-            <Snowfall
-                style={{
-                    position: 'fixed',
-                    width: '100vw'
-                }}
-                snowflakeCount={100}
-                radius={[0.5,4]}
-                wind={[0.5,2]}
-                speed={[0.5,2]}
-            />
             <Navbar />
-            <BrowserRouter basename={process.env.PUBLIC_URL}>
+            <BrowserRouter>
                 <Routes>
                     <Route path='/home' element={<HomeScreen user={uid} />} />
                     <Route path='/' element={<HomeScreen user={uid} />} />

@@ -6,14 +6,18 @@ body, h1, h2, p, ul, li {
 
 /* Navbar styles */
 .navbar {
-  background: #00000077;
-  backdrop-filter: blur(64px);
-  padding: 10px 20px;
+  background: #000000cc;
+  backdrop-filter: blur(35px);
+  padding: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: #fdfdfd;
   font-size: 1.2rem;
+  position: fixed;
+  width: 100%;
+  z-index: 9999;
+  top: 0;
 }
 
 .navbar-logo {
@@ -27,6 +31,7 @@ body, h1, h2, p, ul, li {
     display: flex;
     flex-direction: column;
     height: 100%;
+    margin-right: 25px;
 }
 
 .user-handle a {
@@ -44,15 +49,16 @@ body, h1, h2, p, ul, li {
   padding: 8px;
   display: flex;
   align-items: center;
-  background: #555;
-  border: 2px solid #000;
+  border: 2px solid transparent;
   border-radius: 16px;
   color: #fdfdfd;
   font-size: 32px;
+  transition: .25s;
 }
 
 .navbar-link:hover {
   border: 2px solid #fdfdfd;
+  transition: .25s;
 }
 
 
@@ -73,9 +79,5 @@ body, h1, h2, p, ul, li {
 
     .user-fullname {
       display: none;
-    }
-
-    .navbar {
-        padding: 8px;
     }
 }

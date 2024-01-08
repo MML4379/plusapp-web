@@ -38,9 +38,7 @@ const ChristmasCountdown = () => {
 
   return (
     <div className="countdown">
-      <h2>New Year's Day Countdown</h2>
-      <strong>Anyone who made their account before 12/24/2023 has recieved the <span className='mythic-text'>Christmas UI Skin (MYTHIC)</span>! You will recieve a <span className='rare-text'>New Year 2024 Badge (RARE)</span> on 12/31/2023 at 11:59 PM.</strong>
-      <p>(January 1, 2024)</p>
+      <h2>Counting down to 2024!</h2>
       <div className="timer">
         <div className="unit">
           <span className='timeNum'>{timeLeft.days}</span>

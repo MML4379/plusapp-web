@@ -1,19 +1,20 @@
 body {
     width: 100vw;
     height: 100vh;
-    background-image: url('../assets/plusmas23.png');
+    background-image: url('../assets/plus-event-2024-special.png');
     background-attachment: fixed;
-    background-repeat: none;
     color: #fdfdfd;
     margin: 0;
     padding: 0;
-    animation: gradientAnimation 10s linear infinite;
+    background-size: 100%;
     overflow-x: hidden;
 }
 
 .afnjdd {/* Sign up/login page container */
     padding: 8px;
     background: #222;
+    margin-top: 68px;
+    overflow: hidden;
 }
 .afnjdd input {
     margin: 8px;
@@ -48,12 +49,14 @@ body {
 .nfdjkd {/* Home screen page container */
     background: #000000cc;
     padding: 12px;
+    margin-top: 68px;
 }
 
 .fvdual {/* Post screen page container */
     background: #000000cc;
     padding: 12px;
     text-align: center;
+    margin-top: 68px;
 }
 
 .postArea {
@@ -71,6 +74,7 @@ body {
 .ucniga {/* detailed post page */ 
     background: #000000cc;
     padding: 12px;
+    margin-top: 68px;
 }
 
 .post {
@@ -132,6 +136,7 @@ body {
 .jkgsul {/* profile page container */
   background: #000000cc;
   padding: 12px;
+  margin-top: 68px;
 }
 .userPfp {
   background: #fdfdfd;

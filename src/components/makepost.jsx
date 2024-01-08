@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
-import { addDoc, collection, doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 import '../css/main.css'
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const MakePost = () => {
     const [postText, setPostText] = useState('');
+    const [user] = useAuthState(auth);
+    var uid;
   
-    const handlePost = async () => {
-      const user = auth.currentUser; // Get the current user
-  
+    const HandlePost = async () => {
+      
       if (!user) {
-        alert('User not authenticated. Please log in.');
+        alert('You cannot post without being logged in. Please log in to continue.');
         return;
+      }else {
+        uid = user.uid;
       }
   
       if (!postText.trim()) {
@@ -19,17 +23,13 @@ const MakePost = () => {
         return;
       }
 
-      const postInfo = {
+      var postInfo = {
         details: {
-            author: user.uid,
+            author: uid,
             text: postText,
             timePosted: serverTimestamp(),
-            visibility: 'public',
             sponsored: false,
             likes: 0,
-            approves: 0,
-            views: 0,
-            comments: 0,
             postId: ""
           },
           comments: [],
@@ -39,15 +39,7 @@ const MakePost = () => {
         // Add the post to the 'posts' collection
         const newPostRef = await addDoc(collection(db, 'posts'), postInfo);
         postInfo.details.postId = newPostRef.id;
-  
-        // Update the user's coin count
-        await setDoc(doc(db, 'users', user.uid), {
-          coins: user.coins + 5,
-        }, { merge: true });
-  
-        alert('Post successful!');
-        setPostText('');
-  
+
         window.location.replace(`/post/${newPostRef.id}`);
       } catch (error) {
         console.error('Error posting:', error.message);
@@ -60,12 +52,12 @@ const MakePost = () => {
       <textarea
         value={postText}
         onChange={(e) => setPostText(e.target.value)}
-        placeholder="Wow, @notmml really did deck the halls here!"
+        placeholder="What are you thinking about?"
         className='smallPostArea'
         maxLength={250}
       />
       <br />
-      <button className='plus-button --lg_button --margin8l' onClick={handlePost}>Post!</button>
+      <button className='plus-button --lg_button --margin8l' onClick={HandlePost}>Post!</button>
     </div>
   );
 };

@@ -7,7 +7,6 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { doc, getDoc, updateDoc, onSnapshot, collection, addDoc, getDocs } from 'firebase/firestore';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import ChristmasCountdown from '../components/christmasCountdown';
 import '../css/main.css';
 import { faThumbsUp, faComment, faShare, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 library.add(faThumbsUp, faComment, faShare, faArrowUpRightFromSquare);
@@ -56,13 +55,12 @@ const HomeScreen = () => {
       const postSnapshot = await getDoc(postRef);
       const postDetails = postSnapshot.data()?.details || {};
       const likes = postDetails.likes || 0;
-      const updatedLikes = likes + 1;
 
+      // If not liked, update the like count and add user to likedBy list
+      const updatedLikes = likes + 1;
       await updateDoc(postRef, {
         'details.likes': updatedLikes
       });
-
-      console.log('Liked post');
 
       setLikesMap((prevLikesMap) => ({
         ...prevLikesMap,
@@ -71,7 +69,7 @@ const HomeScreen = () => {
     } catch (error) {
       console.error('Error liking post: ', error);
     }
-  };
+};
 
   const handleAddComment = async () => {
     try {
@@ -81,8 +79,7 @@ const HomeScreen = () => {
         author: uid,
         postId: selectedPostId, // Add postId to the comment object
       });
-  
-      console.log('Added comment');
+
       // Clear the comment text and hide the modal after adding a comment
       setCommentText('');
       setShowCommentsModal(false);
@@ -100,7 +97,6 @@ const HomeScreen = () => {
         postId: postId, // Include postId in each comment
         ...doc.data(),
       }));
-      console.log('Fetched comments:', commentsData);
       setComments(commentsData);
     } catch (error) {
       console.error('Error fetching comments:', error);
@@ -128,23 +124,23 @@ const HomeScreen = () => {
       <MakePost />
       {posts.length > 0 ? (
   <div className='postList'>
-    <ChristmasCountdown />
     {posts.map((post) => (
       <div className='post' data-mmlid={post.id} key={post.id}>
         <header className='postHeader'>
           <AuthorInfo uid={post.details.author} />
         </header>
+        <br />
         <main className='postBody'>{post.details.text}</main>
         <br />
         <footer className='postButtons'>
-          <button className='plus-button --lg_button' onClick={() => handleLike(post.id)}>
+          <button className='plus-button' onClick={() => handleLike(post.id)}>
             <FontAwesomeIcon icon='fa-solid fa-thumbs-up' /> {likesMap[post.id] || post.details.likes}
           </button>
-          <button className='plus-button --lg_button' onClick={() => openCommentsModal(post.id)}>
+          <button className='plus-button' onClick={() => openCommentsModal(post.id)}>
             <FontAwesomeIcon icon='fa-solid fa-comment' />
           </button>
-          <button className='plus-button --lg_button'><FontAwesomeIcon icon='fa-solid fa-share' /></button>
-          <button className='plus-button --lg_button' onClick={() => window.location.replace(`/post/${post.id}`)}>
+          <button className='plus-button'><FontAwesomeIcon icon='fa-solid fa-share' /></button>
+          <button className='plus-button' onClick={() => window.location.replace(`/post/${post.id}`)}>
             <FontAwesomeIcon icon='fa-solid fa-arrow-up-right-from-square' />
           </button>
         </footer>
@@ -152,7 +148,10 @@ const HomeScreen = () => {
     ))}
   </div>
 ) : (
-  <p>No posts available</p>
+  <div className='nfdjkd'>
+    <h1>Well that wasn't supposed to happen...</h1>
+    <p>Nothing is loading! Check your internet connection or the MML+ status page, and try again.</p>
+  </div>
 )}
 
 {/* Comments Modal */}
