@@ -1,0 +1,33 @@
+.countdown {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .timer {
+    display: flex;
+    justify-content: space-around;
+    font-size: 24px;
+    color: #fff;
+  }
+  
+  .unit {
+    text-align: center;
+  }
+  
+  .unit span:first-child {
+    font-size: 36px;
+    font-weight: bold;
+  }
+  
+  .unit span:last-child {
+    font-size: 14px;
+    font-weight: normal;
+  }
+
+  .timeNum {
+    color: #dd0404;
+  }
+
+  .timeUnit {
+    color: #0264dd;
+  }
